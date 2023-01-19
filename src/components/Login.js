@@ -6,9 +6,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { connect } from 'react-redux';
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { handleLogin, setAuthedUser } from "../actions/authedUser";
+import { handleLogin } from "../actions/authedUser";
 
 import pollsImage from '../images/polls-image.png';
 
@@ -29,10 +29,10 @@ const Login = ({dispatch}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(handleLogin(userInfo.username, userInfo.password));
-    // setUSerInfo({
-    //   username: '',
-    //   password: '',
-    // })
+    setUSerInfo({
+      username: '',
+      password: '',
+    })
     navigate("/home");
   }
 

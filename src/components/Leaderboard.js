@@ -1,9 +1,37 @@
-import React from 'react'
+import React from 'react';
+import Table from 'react-bootstrap/Table';
+import { connect } from 'react-redux';
 
-const Leaderboard = () => {
+const Leaderboard = ({users}) => {
+  const stats = Object.values(users).sort(
+    (a,b) => Object.keys(b.answers).length - Object.keys(a.answers).length
+  );
   return (
-    <div>Leaderboard</div>
+    <Table striped>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Answered Polls</th>
+          <th>Created Polls</th>
+        </tr>
+      </thead>
+      <tbody>
+      {stats && stats.map((stat, index) => (
+        <tr key={stat.id}>
+          <td>{index}</td>
+          <td>{stat.name}</td>
+          <td>{Object.keys(stat.answers).length}</td>
+          <td>{stat.questions.length}</td>
+        </tr>
+      ))}
+      </tbody>
+    </Table>
   )
 }
 
-export default Leaderboard
+const mapStateToProps = ({users}) => ({
+  users
+})
+
+export default connect(mapStateToProps)(Leaderboard);

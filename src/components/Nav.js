@@ -1,9 +1,37 @@
-import React from 'react'
+import React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav'
 
-const Nav = () => {
+import { handleLogout } from '../actions/authedUser';
+
+const NavBar = ({authedUserId, dispatch}) => {
+
+  const handleUserLogout = (e) => {
+    e.preventDefault();
+    dispatch(handleLogout());
+  }
+
   return (
-    <div>Nav</div>
+    <Navbar bg="dark" variant="dark" className="px-2 mb-5">
+      <Nav className="me-auto">
+        <Link to="/home" className="nav-link">Home</Link>
+        <Link to="/new" className="nav-link mx-2">New</Link>
+        <Link to="/leaderboard" className="nav-link mx-2">Leaderboard</Link>
+        <Navbar.Toggle />
+      </Nav>
+      <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Logout: <a href="#login" onClick={handleUserLogout}>{authedUserId}</a>
+          </Navbar.Text>
+        </Navbar.Collapse>
+    </Navbar>
   )
 }
 
-export default Nav
+const mapStateToProps = ({authedUser}) => ({
+  authedUserId: authedUser.id,
+});
+
+export default connect(mapStateToProps)(NavBar);

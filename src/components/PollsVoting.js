@@ -11,11 +11,10 @@ import { handleAddAnswer } from '../actions/questions';
 const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const question = Object.values(questions).find(question => question.id === id);
 
   if(!authedUser || !question) {
-    return navigate('/');
+    return navigate("/404");
   }
   
   const hasChoseOptionOne = question.optionOne.votes.includes(authedUser.id);
@@ -23,14 +22,13 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
   const hasVoted = hasChoseOptionOne || hasChoseOptionTwo;
 
   const handleOptionClick = (e) => {
-
     const { id } = e.target;
     dispatch(handleAddAnswer(question.id, id));
     navigate('/home')
   }
 
   const calculatePercentage = (option, question) => {
-    const numberVotesTotal = question.optionOne.votes.length + question.optionTwo.votes.length;
+    const numberVotesTotal = (question.optionOne.votes.length + question.optionTwo.votes.length);
     switch (option) {
       case "optionOne":
         return question.optionOne.votes.length / numberVotesTotal * 100 + " %";
@@ -50,7 +48,7 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
         <Col xs="12" lg="6" className="text-center my-3">
           <h1>Poll By {author.name}</h1>
           <h5>Would you rather?</h5>
-          <Button variant="primary w-100 mb-2" disabled={hasVoted} onClick={handleOptionClick} id="optionOne">
+          <Button variant={`${!hasVoted ? 'primary' : 'secondary' } w-100 mb-2`} disabled={hasVoted} onClick={handleOptionClick} id="optionOne">
             <p>{question?.optionOne.text}</p>
           {!hasVoted ? (
             'Click'
@@ -58,7 +56,7 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
             `Votes: ${question.optionOne.votes.length} (${calculatePercentage("optionOne", question)})`
           )}
           </Button>
-          <Button variant="primary w-100" disabled={hasVoted} onClick={handleOptionClick} id="optionTwo">
+          <Button variant={`${!hasVoted ? 'primary' : 'secondary' } w-100`} disabled={hasVoted} onClick={handleOptionClick} id="optionTwo">
           <p>{question?.optionTwo.text}</p>
           {!hasVoted ? (
             'Click'
