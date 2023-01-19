@@ -36,6 +36,6 @@ describe("Login", () => {
     expect(userInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
-    // fireEvent.click(loginButton);
+    fireEvent.click(loginButton);
   });
 });
