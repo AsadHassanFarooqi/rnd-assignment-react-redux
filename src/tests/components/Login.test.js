@@ -5,7 +5,6 @@ import {BrowserRouter} from "react-router-dom";
 
 import {store} from "../../store";
 import Login from "../../components/Login";
-import {handleInitialData} from "../../actions/shared";
 
 describe("Login", () => {
   it("should render the component", () => {
@@ -29,11 +28,14 @@ describe("Login", () => {
       </Provider>
     );
     const userInput = view.getByTestId("user-field");
+    fireEvent.change(userInput, { target: { value: "sarahedo" } });
     const passwordInput = view.getByTestId("password-field");
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
     const loginButton = view.getByTestId("login-btn");
 
     expect(userInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
+    // fireEvent.click(loginButton);
   });
 });

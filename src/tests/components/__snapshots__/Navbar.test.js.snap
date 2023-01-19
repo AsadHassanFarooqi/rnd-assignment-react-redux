@@ -48,7 +48,7 @@ Object {
             Logout: 
             <a
               data-testid="user-information"
-              href="#login"
+              href="/"
             >
               sarahedo
             </a>
@@ -101,7 +101,7 @@ Object {
           Logout: 
           <a
             data-testid="user-information"
-            href="#login"
+            href="/"
           >
             sarahedo
           </a>

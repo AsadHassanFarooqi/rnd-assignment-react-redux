@@ -20,7 +20,7 @@ describe("NewPoll", () => {
     expect(view).toMatchSnapshot();
   });
 
-  it.only("should display all elements", () => {
+  it("should display all elements", () => {
     const view = render(
       <Provider store={store}>
         <BrowserRouter>
