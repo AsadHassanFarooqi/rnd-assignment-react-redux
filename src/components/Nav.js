@@ -23,7 +23,7 @@ const NavBar = ({authedUserId, dispatch}) => {
       </Nav>
       <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Logout: <a href="#login" onClick={handleUserLogout}>{authedUserId}</a>
+            Logout: <Link to="/" onClick={handleUserLogout} data-testid="user-information">{authedUserId}</Link>
           </Navbar.Text>
         </Navbar.Collapse>
     </Navbar>

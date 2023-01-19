@@ -31,23 +31,19 @@ const NewPoll = ({dispatch, authedUser}) => {
   return (
     <div className="card">
       <Row>
-        <Col xs="12" lg="4" className="py-3 border-end text-center">
-          <Image src={authedUser.avatarURL} />
-          <h4 className="mt-2">{authedUser.name}</h4>
-        </Col>
-        <Col xs="12" lg="8" className="d-flex align-items-center pe-4">
+        <Col xs="12" lg="12" className="d-flex align-items-center p-4">
           <Form className="w-100" onSubmit={handleSubmit}>
             <h2>Would you rather?</h2>
             <Form.Group className="mb-3">
-              <Form.Label>First option</Form.Label>
-              <Form.Control type="text" placeholder="Enter first option" id="firstOption" onChange={handleFirstOptionChange} />
+              <Form.Label data-testid="firstOptionLabel">First option</Form.Label>
+              <Form.Control type="text" placeholder="Enter first option" id="firstOption" onChange={handleFirstOptionChange} data-testid="firstOption" />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Second option</Form.Label>
-              <Form.Control type="text" placeholder="Enter second option" id="secondOption" onChange={handleSecondOptionChange} />
+              <Form.Label data-testid="secondOptionLabel">Second option</Form.Label>
+              <Form.Control type="text" placeholder="Enter second option" id="secondOption" onChange={handleSecondOptionChange} data-testid="secondOption" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" data-testid="submit-poll">
               Submit
             </Button>
           </Form>

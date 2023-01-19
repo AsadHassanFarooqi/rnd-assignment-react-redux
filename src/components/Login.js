@@ -29,10 +29,8 @@ const Login = ({dispatch}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(handleLogin(userInfo.username, userInfo.password));
-    setUSerInfo({
-      username: '',
-      password: '',
-    })
+    userInfo.username = "";
+    userInfo.password = "";
     navigate("/home");
   }
 
@@ -46,7 +44,7 @@ const Login = ({dispatch}) => {
         <Form className="mt-5" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="text" placeholder="Enter id" value={userInfo.username} name="username" onChange={handleOnChange} />
+            <Form.Control type="text" placeholder="Enter id" value={userInfo.username} name="username" onChange={handleOnChange} data-testid="user-field" />
             {userInfo.username === '' &&  (
               <Alert variant="danger">
                 <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
@@ -56,10 +54,10 @@ const Login = ({dispatch}) => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={userInfo.password} name="password" onChange={handleOnChange} />
+            <Form.Control type="password" placeholder="Password" value={userInfo.password} name="password" onChange={handleOnChange} data-testid="password-field" />
           </Form.Group>
           <div className="text-center">
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" data-testid="login-btn">
               Submit
             </Button>
           </div>
