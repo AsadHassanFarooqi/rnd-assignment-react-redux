@@ -24,7 +24,6 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
   const handleOptionClick = (e) => {
     const { id } = e.target;
     dispatch(handleAddAnswer(question.id, id));
-    navigate('/home')
   }
 
   const calculatePercentage = (option, question) => {

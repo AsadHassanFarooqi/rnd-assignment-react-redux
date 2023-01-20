@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import { connect } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
@@ -12,26 +11,29 @@ import { handleLogin } from "../actions/authedUser";
 
 import pollsImage from '../images/polls-image.png';
 
-const Login = ({dispatch}) => {
+const Login = ({dispatch, users}) => {
 
-  const [userInfo, setUSerInfo] = useState({
-    username: 'sarahedo',
-    password: 'password123'
-  })
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setUSerInfo({ [name]: value});
+  const handleUsername = (e) => {
+    const userID = e.target.value;
+    setUsername(userID);
+  }
+
+  const handlePassword = (e) => {
+    const userPassword = e.target.value;
+    setPassword(userPassword);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(handleLogin(userInfo.username, userInfo.password));
-    userInfo.username = "";
-    userInfo.password = "";
-    navigate("/home");
+    dispatch(handleLogin(username, password));
+    setUsername('');
+    setPassword('');
+    navigate(-1);
   }
 
   return (
@@ -42,19 +44,19 @@ const Login = ({dispatch}) => {
       </Col>
       <Col lg="8">
         <Form className="mt-5" onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="text" placeholder="Enter id" value={userInfo.username} name="username" onChange={handleOnChange} data-testid="user-field" />
-            {userInfo.username === '' &&  (
-              <Alert variant="danger">
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-              </Alert>
-            )}
+          <Form.Group className="mb-3">
+            <Form.Label>User ID</Form.Label>
+            <Form.Select aria-label="users select" value={username} onChange={handleUsername} data-testid="user-field">
+              <option>Open this select user</option>
+              {Object.values(users).map(user => (
+                <option value={user.id} key={user.id}>{user.id}</option>
+              ))}
+            </Form.Select>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={userInfo.password} name="password" onChange={handleOnChange} data-testid="password-field" />
+            <Form.Control type="password" placeholder="Password" value={password} name="password" onChange={handlePassword} data-testid="password-field" />
           </Form.Group>
           <div className="text-center">
             <Button variant="primary" type="submit" data-testid="login-btn">
@@ -67,4 +69,8 @@ const Login = ({dispatch}) => {
   )
 }
 
-export default connect()(Login);
+const mapStateToProps = ({users}) => ({
+  users
+})
+
+export default connect(mapStateToProps)(Login);

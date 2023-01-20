@@ -13,29 +13,24 @@ import PollsVoting from './PollsVoting';
 import NewPoll from './NewPoll';
 import AuthenticatedRoute from './AuthenticatedRoute';
 
-function App({dispatch, loggedIn}) { 
-
+function App({dispatch}) { 
   useEffect(() => {
     dispatch(handleInitialData());
-  })
-
+  });
+  
   return (
     <Container>
-      {loggedIn && <Nav />}
+      <Nav />
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/home" element={<AuthenticatedRoute><Dashboard /></AuthenticatedRoute>} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/" element={<AuthenticatedRoute><Dashboard /></AuthenticatedRoute>} />
         <Route exact path="/question/:id" element={<AuthenticatedRoute><PollsVoting /></AuthenticatedRoute>} />
         <Route exact path="/leaderboard" element={<AuthenticatedRoute><Leaderboard /></AuthenticatedRoute>} />
-        <Route exact path="/new" element={<AuthenticatedRoute><NewPoll /></AuthenticatedRoute>} />
-        <Route path="/404" element={<NotFound />} />
+        <Route exact path="/add" element={<AuthenticatedRoute><NewPoll /></AuthenticatedRoute>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Container>
   );
 }
 
-const mapStateToProps = ({authedUser}) => ({
-  loggedIn: authedUser
-})
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

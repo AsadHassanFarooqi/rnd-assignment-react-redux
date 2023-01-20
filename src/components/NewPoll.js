@@ -25,7 +25,7 @@ const NewPoll = ({dispatch, authedUser}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(handleAddQuestion(firstOption, secondOption));
-        navigate("/home");
+        navigate("/");
     };
 
   return (

@@ -16,22 +16,26 @@ const NavBar = ({authedUserId, dispatch}) => {
   return (
     <Navbar bg="dark" variant="dark" className="px-2 mb-5">
       <Nav className="me-auto">
-        <Link to="/home" className="nav-link">Home</Link>
-        <Link to="/new" className="nav-link mx-2">New</Link>
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/add" className="nav-link mx-2">Add</Link>
         <Link to="/leaderboard" className="nav-link mx-2">Leaderboard</Link>
         <Navbar.Toggle />
       </Nav>
-      <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Logout: <Link to="/" onClick={handleUserLogout} data-testid="user-information">{authedUserId}</Link>
-          </Navbar.Text>
-        </Navbar.Collapse>
+      {
+        authedUserId && (
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              Logout: <Link to="/" onClick={handleUserLogout} data-testid="user-information">{authedUserId}</Link>
+            </Navbar.Text>
+          </Navbar.Collapse>
+        )
+      }
     </Navbar>
   )
 }
 
 const mapStateToProps = ({authedUser}) => ({
-  authedUserId: authedUser.id,
+  authedUserId: authedUser?.id,
 });
 
 export default connect(mapStateToProps)(NavBar);

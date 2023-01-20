@@ -37,37 +37,34 @@ Object {
             >
               <label
                 class="form-label"
-                for="formBasicEmail"
               >
-                Email address
+                User ID
               </label>
-              <input
-                class="form-control"
+              <select
+                aria-label="users select"
+                class="form-select"
                 data-testid="user-field"
-                id="formBasicEmail"
-                name="username"
-                placeholder="Enter id"
-                type="text"
-                value="sarahedo"
-              />
+              >
+                <option>
+                  Open this select user
+                </option>
+              </select>
             </div>
             <div
               class="mb-3"
             >
               <label
                 class="form-label"
-                for="formBasicPassword"
               >
                 Password
               </label>
               <input
                 class="form-control"
                 data-testid="password-field"
-                id="formBasicPassword"
                 name="password"
                 placeholder="Password"
                 type="password"
-                value="password123"
+                value=""
               />
             </div>
             <div
@@ -119,37 +116,34 @@ Object {
           >
             <label
               class="form-label"
-              for="formBasicEmail"
             >
-              Email address
+              User ID
             </label>
-            <input
-              class="form-control"
+            <select
+              aria-label="users select"
+              class="form-select"
               data-testid="user-field"
-              id="formBasicEmail"
-              name="username"
-              placeholder="Enter id"
-              type="text"
-              value="sarahedo"
-            />
+            >
+              <option>
+                Open this select user
+              </option>
+            </select>
           </div>
           <div
             class="mb-3"
           >
             <label
               class="form-label"
-              for="formBasicPassword"
             >
               Password
             </label>
             <input
               class="form-control"
               data-testid="password-field"
-              id="formBasicPassword"
               name="password"
               placeholder="Password"
               type="password"
-              value="password123"
+              value=""
             />
           </div>
           <div
