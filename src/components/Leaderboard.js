@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image';
 import { connect } from 'react-redux';
 
 const Leaderboard = ({users}) => {
@@ -20,7 +21,7 @@ const Leaderboard = ({users}) => {
       {stats && stats.map((stat, index) => (
         <tr key={stat.id}>
           <td>{index}</td>
-          <td>{stat.name}</td>
+          <td><Image src={stat.avatarURL} width="35" roundedCircle={true} /> {stat.name}</td>
           <td>{Object.keys(stat.answers).length}</td>
           <td>{stat.questions.length}</td>
         </tr>

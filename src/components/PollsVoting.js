@@ -47,7 +47,7 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
         <Col xs="12" lg="6" className="text-center my-3">
           <h1>Poll By {author.name}</h1>
           <h5>Would you rather?</h5>
-          <Button variant={`${!hasVoted ? 'primary' : 'secondary' } w-100 mb-2`} disabled={hasVoted} onClick={handleOptionClick} id="optionOne">
+          <Button variant={`${!hasChoseOptionOne ? 'outline-primary' : 'success' } w-100 mb-2`} disabled={hasVoted} onClick={handleOptionClick} id="optionOne">
             <p>{question?.optionOne.text}</p>
           {!hasVoted ? (
             'Click'
@@ -55,7 +55,7 @@ const PollsVoting = ({ dispatch, authedUser, questions, author }) => {
             `Votes: ${question.optionOne.votes.length} (${calculatePercentage("optionOne", question)})`
           )}
           </Button>
-          <Button variant={`${!hasVoted ? 'primary' : 'secondary' } w-100`} disabled={hasVoted} onClick={handleOptionClick} id="optionTwo">
+          <Button variant={`${!hasChoseOptionTwo ? 'outline-primary' : 'success' } w-100`} disabled={hasVoted} onClick={handleOptionClick} id="optionTwo">
           <p>{question?.optionTwo.text}</p>
           {!hasVoted ? (
             'Click'
